@@ -1,12 +1,13 @@
 const Scorecard = function() {
-  var roll = function() {
-    return [
-      {roll1: 0}
-    ]
+  var rolls = [];
+
+  var addRoll = function(pins) {
+    if (rolls.length < 10) rolls.push(pins) 
+    return rolls;
   }
 
   return {
-    roll: roll
+    addRoll: addRoll
   };
 }
 
