@@ -1,18 +1,16 @@
 const Scorecard = function() {
   var rolls = [];
-  var frameScores = [];
-
+  
   var addRoll = function(pinCount) {
     if (validRoll(pinCount) && activeGame()) rolls.push(pinCount);
     return rolls;
   }
 
   var calculateFrameScores = function() {
-    rollCount = rolls.length
-    frameCount = frameScores.length
-    if (Math.floor(rollCount / 2) > frameCount) {
-      for (var i = frameCount * 2; i < rollCount - 1; i += 2) {
-        frameScores.push(rolls[i] + rolls[i+1])
+    var frameScores = []
+    if (rolls.length > 1) {
+      for (var i = 0; i < rolls.length; i += 2) {
+        if (rolls[i+1]) frameScores.push(rolls[i] + rolls[i+1])
       }
     }
     return frameScores;
