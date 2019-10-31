@@ -1,6 +1,8 @@
 const Scorecard = function() {
   var rolls = [];
   var STANDARD_ROLL_COUNT = 20
+  var MIN_VALID_ROLL = 0
+  var MAX_VALID_ROLL = 10
   var rollsInGame = STANDARD_ROLL_COUNT
 
   var addRoll = function(pinCount) {
@@ -13,14 +15,23 @@ const Scorecard = function() {
     var frameScores = []
     if (rolls.length > 1) {
       for (var i = 0; i < rolls.length; i += 2) {
-        if (rolls[i+1]) frameScores.push(rolls[i] + rolls[i+1])
+        var awaitingBonus;
+        frameScore = rolls[i] + rolls[i+1]
+        if (frameScore === MAX_VALID_ROLL) awaitingBonus = true;
+        if (awaitingBonus && rolls[i+2]) {
+          frameScore += rolls[i+2];
+          awaitingBonus = false
+        }
+        if (frameScore >= 0 && !awaitingBonus) {
+          frameScores.push(frameScore);
+        }
       }
     }
     return frameScores;
   }
 
   var validRoll = function(roll) {
-    return roll >= 0 && roll <= 10
+    return roll >= MIN_VALID_ROLL && roll <= MAX_VALID_ROLL
   }
 
   var activeGame = function() {
@@ -28,7 +39,7 @@ const Scorecard = function() {
   }
 
   var bonusRollWon = function() {
-    return rolls.length == STANDARD_ROLL_COUNT && rolls[18] + rolls[19] == 10
+    return rolls.length == STANDARD_ROLL_COUNT && rolls[18] + rolls[19] == MAX_VALID_ROLL
   }
 
   return {

@@ -177,5 +177,49 @@ describe("Gutter Game", () => {
         expect(scorecard.calculateFrameScores()).toEqual([1, 5, 9, 7, 9, 1, 5, 9, 7, 9]);
       });
     });
+
+    describe("calculate Strike bonus", () => {
+      it("doesn't calculate score until bonus roll made", () => {
+        scorecard.addRoll(0)
+        scorecard.addRoll(0)
+        scorecard.addRoll(2)
+        scorecard.addRoll(8)
+        expect(scorecard.calculateFrameScores()).toEqual([0])
+      })
+
+      it("calculates the score once bonus roll made", () => {
+        scorecard.addRoll(0)
+        scorecard.addRoll(0)
+        scorecard.addRoll(2)
+        scorecard.addRoll(8)
+        scorecard.addRoll(2)
+        expect(scorecard.calculateFrameScores()).toEqual([0, 12])
+      })
+
+      it("calculates a game of spares", () => {
+        scorecard.addRoll(5)
+        scorecard.addRoll(5)
+        scorecard.addRoll(5)
+        scorecard.addRoll(5)
+        scorecard.addRoll(5)
+        scorecard.addRoll(5)
+        scorecard.addRoll(5)
+        scorecard.addRoll(5)
+        scorecard.addRoll(5)
+        scorecard.addRoll(5)
+        scorecard.addRoll(5)
+        scorecard.addRoll(5)
+        scorecard.addRoll(5)
+        scorecard.addRoll(5)
+        scorecard.addRoll(5)
+        scorecard.addRoll(5)
+        scorecard.addRoll(5)
+        scorecard.addRoll(5)
+        scorecard.addRoll(5)
+        scorecard.addRoll(5)
+        scorecard.addRoll(5)
+        expect(scorecard.calculateFrameScores()).toEqual([15, 15, 15, 15, 15, 15, 15, 15, 15, 15])
+      })
+    });
   });
 });
