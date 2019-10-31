@@ -1,14 +1,19 @@
 {
   "name": "bowlingchallenge",
   "version": "1.0.0",
-  "description": "",
+  "description": "## The Task",
   "main": "index.js",
+  "type": "module",
+  "dependencies": {
+    "jasmine": "^3.5.0"
+  },
+  "devDependencies": {
+    "eslint": "^6.6.0",
+    "jest": "^24.9.0"
+  },
   "scripts": {
-    "test": "jasmine"
+    "test": "jest"
   },
   "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "jasmine": "^3.5.0"
-  }
+  "license": "ISC"
 }
