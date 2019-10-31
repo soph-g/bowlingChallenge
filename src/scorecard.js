@@ -1,9 +1,11 @@
 const Scorecard = function() {
   var rolls = [];
   var STANDARD_ROLL_COUNT = 20
+  var rollsInGame = STANDARD_ROLL_COUNT
 
   var addRoll = function(pinCount) {
     if (validRoll(pinCount) && activeGame()) rolls.push(pinCount);
+    if (bonusRollWon()) rollsInGame += 1;
     return rolls;
   }
 
@@ -22,7 +24,11 @@ const Scorecard = function() {
   }
 
   var activeGame = function() {
-    return rolls.length < STANDARD_ROLL_COUNT
+    return rolls.length < rollsInGame
+  }
+
+  var bonusRollWon = function() {
+    return rolls.length == STANDARD_ROLL_COUNT && rolls[18] + rolls[19] == 10
   }
 
   return {
