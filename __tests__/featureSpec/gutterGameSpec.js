@@ -119,19 +119,15 @@ describe("Gutter Game", () => {
       it("returns the correct score when called multiple times", () => {
         scorecard.addRoll(0);
         scorecard.addRoll(1);
-        expect(scorecard.calculateFrameScores()).toEqual([1])
-        expect(scorecard.calculateFrameScores()).toEqual([1])
+        scorecard.calculateFrameScores()
         scorecard.addRoll(2);
-        expect(scorecard.calculateFrameScores()).toEqual([1])
-        expect(scorecard.calculateFrameScores()).toEqual([1])
+        scorecard.calculateFrameScores()
         scorecard.addRoll(3);
-        expect(scorecard.calculateFrameScores()).toEqual([1, 5])
-        expect(scorecard.calculateFrameScores()).toEqual([1, 5])
+        scorecard.calculateFrameScores()
         scorecard.addRoll(4);
-        expect(scorecard.calculateFrameScores()).toEqual([1, 5])
+        scorecard.calculateFrameScores()
         scorecard.addRoll(5);
-        expect(scorecard.calculateFrameScores()).toEqual([1, 5, 9])
-        expect(scorecard.calculateFrameScores()).toEqual([1, 5, 9])
+        scorecard.calculateFrameScores()
         scorecard.addRoll(6);
         scorecard.addRoll(1);
         scorecard.addRoll(7);
@@ -146,7 +142,7 @@ describe("Gutter Game", () => {
         scorecard.addRoll(1);
         scorecard.addRoll(7);
         scorecard.addRoll(2);
-        expect(scorecard.calculateFrameScores()).toEqual([1, 5, 9, 7, 9, 1, 5, 9, 7, 9])
+        scorecard.calculateFrameScores()
         expect(scorecard.calculateFrameScores()).toEqual([1, 5, 9, 7, 9, 1, 5, 9, 7, 9])
       })
     });
