@@ -57,13 +57,13 @@ describe("Gutter Game", () => {
   });
 
   describe("#calculateFrameScores", () => {
-    xit("returns an empty array when there are no complete frames", () => {
+    it("returns an empty array when there are no complete frames", () => {
       scorecard.addRoll(0);
       expect(scorecard.calculateFrameScores()).toEqual([]);
     });
 
     describe('no bonuses', () => {
-      xit("returns the score when there is a single complete frame", () => {
+      it("returns the score when there is a single complete frame", () => {
         scorecard.addRoll(2);
         scorecard.addRoll(7);
         expect(scorecard.calculateFrameScores()).toEqual([9])
@@ -101,14 +101,14 @@ describe("Gutter Game", () => {
         expect(scorecard.calculateFrameScores()).toEqual([1, 5, 9, 7, 9, 1, 5, 9, 7, 9])
       });
 
-      xit("returns the score when there is a complete and incomplete frame", () => {
+      it("returns the score when there is a complete and incomplete frame", () => {
         scorecard.addRoll(2);
         scorecard.addRoll(7);
         scorecard.addRoll(4);
         expect(scorecard.calculateFrameScores()).toEqual([9])
       });
 
-      xit("returns the correct score when called twice", () => {
+      it("returns the correct score when called twice", () => {
         scorecard.addRoll(2);
         scorecard.addRoll(7);
         scorecard.addRoll(8);
@@ -116,7 +116,39 @@ describe("Gutter Game", () => {
         expect(scorecard.calculateFrameScores()).toEqual([9])
       });
 
-
+      it("returns the correct score when called multiple times", () => {
+        scorecard.addRoll(0);
+        scorecard.addRoll(1);
+        expect(scorecard.calculateFrameScores()).toEqual([1])
+        expect(scorecard.calculateFrameScores()).toEqual([1])
+        scorecard.addRoll(2);
+        expect(scorecard.calculateFrameScores()).toEqual([1])
+        expect(scorecard.calculateFrameScores()).toEqual([1])
+        scorecard.addRoll(3);
+        expect(scorecard.calculateFrameScores()).toEqual([1, 5])
+        expect(scorecard.calculateFrameScores()).toEqual([1, 5])
+        scorecard.addRoll(4);
+        expect(scorecard.calculateFrameScores()).toEqual([1, 5])
+        scorecard.addRoll(5);
+        expect(scorecard.calculateFrameScores()).toEqual([1, 5, 9])
+        expect(scorecard.calculateFrameScores()).toEqual([1, 5, 9])
+        scorecard.addRoll(6);
+        scorecard.addRoll(1);
+        scorecard.addRoll(7);
+        scorecard.addRoll(2);
+        scorecard.addRoll(0);
+        scorecard.addRoll(1);
+        scorecard.addRoll(2);
+        scorecard.addRoll(3);
+        scorecard.addRoll(4);
+        scorecard.addRoll(5);
+        scorecard.addRoll(6);
+        scorecard.addRoll(1);
+        scorecard.addRoll(7);
+        scorecard.addRoll(2);
+        expect(scorecard.calculateFrameScores()).toEqual([1, 5, 9, 7, 9, 1, 5, 9, 7, 9])
+        expect(scorecard.calculateFrameScores()).toEqual([1, 5, 9, 7, 9, 1, 5, 9, 7, 9])
+      })
     });
   });
 });
