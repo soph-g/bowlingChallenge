@@ -56,18 +56,67 @@ describe("Gutter Game", () => {
     });
   });
 
-  describe("#calculateScores", () => {
-    it("returns an empty array when there are no complete frames", () => {
+  describe("#calculateFrameScores", () => {
+    xit("returns an empty array when there are no complete frames", () => {
       scorecard.addRoll(0);
-      expect(scorecard.calculateScores()).toEqual([]);
+      expect(scorecard.calculateFrameScores()).toEqual([]);
     });
 
     describe('no bonuses', () => {
-      it("returns the score when there is a single complete frame", () => {
+      xit("returns the score when there is a single complete frame", () => {
         scorecard.addRoll(2);
         scorecard.addRoll(7);
-        expect(scorecard.calculateScores()).toEqual([9])
+        expect(scorecard.calculateFrameScores()).toEqual([9])
       });
+
+      it("returns the score when two frames are complete", () => {
+        scorecard.addRoll(0)
+        scorecard.addRoll(9)
+        scorecard.addRoll(2)
+        scorecard.addRoll(6)
+        expect(scorecard.calculateFrameScores()).toEqual([9, 8])
+      });
+
+      it("returns the score when multiple frames are complete", () => {
+        scorecard.addRoll(0);
+        scorecard.addRoll(1);
+        scorecard.addRoll(2);
+        scorecard.addRoll(3);
+        scorecard.addRoll(4);
+        scorecard.addRoll(5);
+        scorecard.addRoll(6);
+        scorecard.addRoll(1);
+        scorecard.addRoll(7);
+        scorecard.addRoll(2);
+        scorecard.addRoll(0);
+        scorecard.addRoll(1);
+        scorecard.addRoll(2);
+        scorecard.addRoll(3);
+        scorecard.addRoll(4);
+        scorecard.addRoll(5);
+        scorecard.addRoll(6);
+        scorecard.addRoll(1);
+        scorecard.addRoll(7);
+        scorecard.addRoll(2);
+        expect(scorecard.calculateFrameScores()).toEqual([1, 5, 9, 7, 9, 1, 5, 9, 7, 9])
+      });
+
+      xit("returns the score when there is a complete and incomplete frame", () => {
+        scorecard.addRoll(2);
+        scorecard.addRoll(7);
+        scorecard.addRoll(4);
+        expect(scorecard.calculateFrameScores()).toEqual([9])
+      });
+
+      xit("returns the correct score when called twice", () => {
+        scorecard.addRoll(2);
+        scorecard.addRoll(7);
+        scorecard.addRoll(8);
+        expect(scorecard.calculateFrameScores()).toEqual([9])
+        expect(scorecard.calculateFrameScores()).toEqual([9])
+      });
+
+
     });
   });
 });
