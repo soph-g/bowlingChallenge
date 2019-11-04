@@ -4,9 +4,6 @@
   "description": "## The Task",
   "main": "index.js",
   "type": "module",
-  "dependencies": {
-    "jasmine": "^3.5.0"
-  },
   "devDependencies": {
     "eslint": "^6.6.0",
     "jest": "^24.9.0"
@@ -15,5 +12,8 @@
     "test": "jest"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "jest": {
+    "testPathIgnorePatterns": ["__tests__/helpers/"]
+  }
 }
