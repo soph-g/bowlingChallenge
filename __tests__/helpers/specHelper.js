@@ -78,6 +78,12 @@ function multipleStrikeGame(game) {
   game.roll(1)
 }
 
+function perfectGame(game) {
+  for (var i = 0; i < 12; i++) {
+    game.roll(10)
+  }
+}
+
 
 module.exports = {
   gutterGame: gutterGame,
@@ -85,5 +91,6 @@ module.exports = {
   singleSpareGame: singleSpareGame,
   multipleSpareGame: multipleSpareGame,
   singleStrikeGame: singleStrikeGame,
-  multipleStrikeGame: multipleStrikeGame
+  multipleStrikeGame: multipleStrikeGame,
+  perfectGame: perfectGame
 }

@@ -27,30 +27,4 @@ describe('Bowling Scores', () => {
       expect(game.score()).toEqual(90);
     });
   });
-
-  describe('bonus scores', () => {
-    describe('scoring spares', () => {
-      it('calculates a bonus for that frame', () => {
-        helper.singleSpareGame(game);
-        expect(game.score()).toEqual(21);
-      });
-
-      it('can calculates multiple spares, with a standard final frame', () => {
-        helper.multipleSpareGame(game);
-        expect(game.score()).toEqual(133);
-      });
-    });
-
-    describe('scoring strikes', () => {
-      xit('adds the next two rolls as a bonus', () => {
-        helper.singleStrikeGame(game);
-        expect(game.score()).toEqual(22);
-      });
-
-      xit('calculates multiple strikes, with a standard final frame', () => {
-        helper.multipleStrikeGame(game);
-        expect(game.score()).toEqual(245)
-      })
-    });
-  });
 });
