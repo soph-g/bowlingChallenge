@@ -2,8 +2,9 @@ const Game = function() {
 
   var rolls = []
   var frameScores = []
-  const STANDARD_ROLL_COUNT = 20
-  var maximum_rolls = STANDARD_ROLL_COUNT
+  const STANDARD_ROLL_LIMIT = 20
+  const FRAME_LIMIT = 10
+  var maximum_rolls = STANDARD_ROLL_LIMIT
   var bonusCalculated = false
   var firstRoll = true
 
@@ -21,7 +22,7 @@ const Game = function() {
 
   function calculateFrameScores(log) {
     next = 0;
-    for (var i = 0; i < STANDARD_ROLL_COUNT; i += 2) {
+    for (var i = 0; i < FRAME_LIMIT; i ++) {
       score = rolls[next] + rolls[next+1]
       if (score >= 10) score += rolls[next+2]
       frameScores.push(score)
