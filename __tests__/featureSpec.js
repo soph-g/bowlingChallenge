@@ -46,5 +46,10 @@ describe('Bowling Scores', () => {
       helper.gutterGame(game, 16)
       expect(game.score()).toEqual(24)
     });
+
+    it('calculates the score for a perfect game', () => {
+      helper.perfectGame(game);
+      expect(game.score()).toEqual(300);
+    });
   });
 });

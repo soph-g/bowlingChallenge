@@ -70,7 +70,13 @@ describe('Game', () => {
         helper.gutterGame(game, 18);
         result = [0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
         expect(game.roll(8)).toEqual(result)
-      })
+      });
+
+      it('allows two rolls after a strike in the final frame', () => {
+        helper.perfectGame(game)
+        result = [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10]
+        expect(game.roll(5)).toEqual(result);
+      });
     });
   });
 
@@ -91,5 +97,20 @@ describe('Game', () => {
         expect(game.score()).toEqual(150)
       });
     });
+
+    describe('strikes', () => {
+      it('calculates the score including bonuses', () => {
+        game.roll(10);
+        game.roll(3);
+        game.roll(4);
+        helper.gutterGame(game, 16)
+        expect(game.score()).toEqual(24)
+      });
+
+      it('calculates the score for a perfect game', () => {
+        helper.perfectGame(game);
+        expect(game.score(true)).toEqual(300);
+      });
+    })
   });
 });

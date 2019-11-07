@@ -20,10 +20,12 @@ const Game = function() {
   }
 
   function calculateFrameScores(log) {
-    for (var i = 0; i < maximum_rolls - 1; i += 2) {
-      score = rolls[i] + rolls[i+1]
-      if (equalsTen(score)) score += rolls[i+2]
+    next = 0;
+    for (var i = 0; i < STANDARD_ROLL_COUNT; i += 2) {
+      score = rolls[next] + rolls[next+1]
+      if (score >= 10) score += rolls[next+2]
       frameScores.push(score)
+      rolls[next] == 10 ? next += 1 : next += 2;
     }
   }
 
@@ -39,10 +41,11 @@ const Game = function() {
     bonusCalculated = true;
     var frameScore = rolls[rolls.length-1] + rolls[rolls.length-2]
     if (equalsTen(frameScore)) maximum_rolls += 1;
+    if (isStrike(rolls[rolls.length-1])) maximum_rolls += 2;
   }
 
   function updateGame(roll) {
-    isStrike(roll) ? maximum_rolls -= 1 : firstRoll = !firstRoll;
+    isStrike(roll) && !bonusCalculated ? maximum_rolls -= 1 : firstRoll = !firstRoll;
   }
 
   function isStrike(roll) {
