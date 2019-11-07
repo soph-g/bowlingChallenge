@@ -26,6 +26,52 @@ describe('Game', () => {
         expect(game.roll(8)).toEqual(result);
       });
     });
+
+    describe('scoring spares', () => {
+      it('does not allow an extra roll if the spare is scored in the first 9 frames', () => {
+        game.roll(5);
+        game.roll(5);
+        helper.gutterGame(game, 18);
+        result = [5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        expect(game.roll(5)).toEqual(result);
+      });
+
+      it('allows an extra roll if the spare is scored in the first 9 frames', () => {
+        helper.gutterGame(game, 18);
+        game.roll(5);
+        game.roll(5);
+        result = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 5, 5]
+        expect(game.roll(5)).toEqual(result);
+      });
+
+      it('only allows 1 extra roll', () => {
+        helper.gutterGame(game, 18);
+        game.roll(5);
+        game.roll(5);
+        game.roll(5);
+        result = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 5, 5]
+        expect(game.roll(3)).toEqual(result);
+      });
+    });
+
+    describe('scoring strikes', () => {
+      it('reduces the number if strike is not in final frame', () => {
+        game.roll(10);
+        game.roll(3);
+        game.roll(4);
+        helper.gutterGame(game, 16)
+        result = [10, 3, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        expect(game.roll(5)).toEqual(result);
+      });
+
+      it('only reduces the count for a roll rolled in the first roll', () => {
+        game.roll(0);
+        game.roll(10);
+        helper.gutterGame(game, 18);
+        result = [0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        expect(game.roll(8)).toEqual(result)
+      })
+    });
   });
 
   describe('#score', () => {
@@ -37,6 +83,13 @@ describe('Game', () => {
     it('returns the total of rolls when no bonuses are scored', () => {
       helper.noBonusGame(game);
       expect(game.score()).toEqual(90);
+    });
+
+    describe('spares', () => {
+      it('calculates the score including bonuses', () => {
+        helper.multipleSpareGame(game);
+        expect(game.score()).toEqual(150)
+      });
     });
   });
 });

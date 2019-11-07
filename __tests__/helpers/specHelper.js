@@ -61,9 +61,34 @@ function multipleSpareGame(game) {
   game.roll(5)
   game.roll(5)
   game.roll(5)
-  game.roll(1)
-  game.roll(1)
+  game.roll(5)
+  game.roll(5)
+  game.roll(5)
 }
+
+function gameWithSpares(game) {
+  game.roll(0)
+  game.roll(0)
+  game.roll(5)
+  game.roll(5)
+  game.roll(1)
+  game.roll(6)
+  game.roll(0)
+  game.roll(10)
+  game.roll(0)
+  game.roll(5)
+  game.roll(5)
+  game.roll(5)
+  game.roll(4)
+  game.roll(3)
+  game.roll(7)
+  game.roll(1)
+  game.roll(0)
+  game.roll(9)
+  game.roll(1)
+  game.roll(2)
+}
+
 function multipleStrikeGame(game) {
   game.roll(10)
   game.roll(10)
@@ -92,5 +117,6 @@ module.exports = {
   multipleSpareGame: multipleSpareGame,
   singleStrikeGame: singleStrikeGame,
   multipleStrikeGame: multipleStrikeGame,
-  perfectGame: perfectGame
+  perfectGame: perfectGame,
+  gameWithSpares: gameWithSpares
 }
